@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
 
         // Login, return generated JWT
         const token = user.generateAuthToken();
-        res.status(200).send({data: token, message: 'Logged in successfully'});
+        res.status(200).send({data: token, message: 'Logged in successfully', user: user});
         
     } catch (error) {
         res.status(500).send({message: 'Internal Server Error', error: error});
