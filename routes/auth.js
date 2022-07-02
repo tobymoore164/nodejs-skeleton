@@ -29,12 +29,10 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/user', async (req, res) => {
+router.post('/user', async (req, res) => {
     try {
         // Check if user exists
         const user = await User.findOne({ email: req.body.email });
-        console.log(req.body.email);
-        console.log(user);
         if (!user) return res.status(401).send({message: 'No user by email...'});
         
         res.status(200).send(user);
