@@ -29,6 +29,18 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.get('/user', async (req, res) => {
+    try {
+        // Check if user exists
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) return res.status(401).send({message: 'No user by email...'});
+        
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(500).send({message: 'Internal Server Error', error: error});
+    }
+})
+
 const validate = (data) => {
     const schema = Joi.object({
         email: Joi.string().email().required().label('Email'),
