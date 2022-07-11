@@ -24,7 +24,7 @@ router.post('/hides-by-user', async (req, res) => {
         // get hides by uid
         const hides = await Hide.find({"uid": req.body.uid});
 
-        res.status(201).send({data: hides});
+        res.status(201).send({hides});
     } catch (error) {
         console.log(error);
         // 500 on error
@@ -32,4 +32,4 @@ router.post('/hides-by-user', async (req, res) => {
     }
 })
 
-module.exports = router;
+module.exports = router; 
