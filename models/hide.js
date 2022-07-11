@@ -24,7 +24,11 @@ const hideSchema = new mongoose.Schema({
     defects: {
         type: Array,
         required: true,
-    }
+    },
+    image: {
+        type: Buffer,
+        required: true,
+    },
 })
 
 const Hide = mongoose.model('hide', hideSchema);
