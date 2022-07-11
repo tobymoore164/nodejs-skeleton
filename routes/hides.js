@@ -6,15 +6,8 @@ router.post('/upload-hide', async (req, res) => {
         // Make sure body is the correct schema
         if (req.body === undefined) return res.status(400).send({message: 'Internal Server Error'});
 
-        // create the image
-        let burger = new Buffer(req.body.image, 'base64');
-
-        // refactor the object to store
-        let formattedData = req.body;
-        formattedData.image = burger;
-
         // Create the new hide
-        await new Hide(formattedData).save();
+        await new Hide(req.body).save();
         res.status(201).send({message: 'Hide created successfully'});
     } catch (error) {
         console.log(error);
