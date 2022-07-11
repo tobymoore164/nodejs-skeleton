@@ -11,6 +11,8 @@ const hideRoutes = require('./routes/hides');
 connection();
 
 // middlewares
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(express.json());
 app.use(cors());
 
@@ -18,7 +20,6 @@ app.use(cors());
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/hides', hideRoutes);
-app.use(express.bodyParser({limit: '50mb'}));
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}`));
