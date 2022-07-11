@@ -16,7 +16,7 @@ router.post('/upload-hide', async (req, res) => {
     }
 });
 
-router.get('/hides-by-user', async (req, res) => {
+router.post('/hides-by-user', async (req, res) => {
     try {
         // return if no request body
         if (req.body === undefined) return res.status(400).send({message: 'Internal Server Error'});
