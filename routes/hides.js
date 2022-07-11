@@ -16,4 +16,20 @@ router.post('/upload-hide', async (req, res) => {
     }
 });
 
+router.get('/hides-by-user', async (req, res) => {
+    try {
+        // return if no request body
+        if (req.body === undefined) return res.status(400).send({message: 'Internal Server Error'});
+
+        // get hides by uid
+        const hides = await Hide.find({"uid": req.body.uid});
+
+        res.status(201).send({data: hides});
+    } catch (error) {
+        console.log(error);
+        // 500 on error
+        res.status(500).send({message: 'Internal Server Error', error: error});
+    }
+})
+
 module.exports = router;
