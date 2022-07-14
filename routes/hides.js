@@ -31,21 +31,7 @@ router.post('/hides-by-user', async (req, res) => {
             } else {
                 formattedHides[_hide.lotNumber].push(_hide)
             }
-        });
-        /* data.forEach((_hide, _index) => {
-            if (_index === 0) {
-                formattedHides.push(
-                    {
-                        "lotNumber": _hide.lotNumber,
-                        "hides": [
-                            _hide
-                        ]
-                    }
-                )
-            } else {
-
-            }
-        });    */     
+        });  
 
         res.status(201).send(formattedHides);
     } catch (error) {
