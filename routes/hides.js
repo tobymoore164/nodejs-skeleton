@@ -22,9 +22,32 @@ router.post('/hides-by-user', async (req, res) => {
         if (req.body === undefined) return res.status(400).send({message: 'Internal Server Error'});
 
         // get hides by uid
-        const hides = await Hide.find({"uid": req.body.uid});
+        const data = await Hide.find({"uid": req.body.uid});
 
-        res.status(201).send({hides});
+        const formattedHides = {};
+        data.forEach((_hide, _index) => {
+            if (_index === 0 || formattedHides[_hide.lotNumber] === undefined) {
+                formattedHides[_hide.lotNumber] = [_hide];
+            } else {
+                formattedHides[_hide.lotNumber].push(_hide)
+            }
+        });
+        /* data.forEach((_hide, _index) => {
+            if (_index === 0) {
+                formattedHides.push(
+                    {
+                        "lotNumber": _hide.lotNumber,
+                        "hides": [
+                            _hide
+                        ]
+                    }
+                )
+            } else {
+
+            }
+        });    */     
+
+        res.status(201).send(formattedHides);
     } catch (error) {
         console.log(error);
         // 500 on error
