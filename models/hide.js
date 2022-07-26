@@ -29,6 +29,10 @@ const hideSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    date: {
+        type: Date,
+        required: true,
+    },
 })
 
 const Hide = mongoose.model('hide', hideSchema);
