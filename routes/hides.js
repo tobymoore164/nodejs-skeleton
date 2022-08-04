@@ -41,4 +41,18 @@ router.post('/hides-by-user', async (req, res) => {
     }
 })
 
+router.put('/update-hide', async (req, res) => {
+    try {
+        // Make sure body is the correct schema
+        if (req.body === undefined) return res.status(400).send({message: 'Internal Server Error'});
+
+        await Hide.findOneAndUpdate({"_id": req.body._id}, req.body);
+        res.status(201).send({message: 'Hide updated successfully'});
+    } catch (error) {
+        console.log(error);
+        // 500 on error
+        res.status(500).send({message: 'Internal Server Error', error: error});
+    }
+});
+
 module.exports = router; 
