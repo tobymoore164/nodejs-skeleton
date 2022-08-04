@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 router.post('/register', async (req, res) => {
     try {
         if (req.body.key !== process.env.SECRET) return res.status(500).send({message: 'Incorrect Key'});
+        // remove the key
+        delete req.body.key;
         // Make sure body is the correct schema
         const {error} = validate(req.body);
         if (error) return res.status(400).send({message: error.details[0].message});
